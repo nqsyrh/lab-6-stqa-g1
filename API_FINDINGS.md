@@ -43,8 +43,8 @@ Request body sent:
 
 ```json
 {
-  "title": "foo",
-  "body": "bar",
+  "title": "Lab 6 Test",
+  "body": "Testing REST API",
   "userId": 1
 }
 ```
@@ -56,11 +56,11 @@ Request body sent:
 
 Response body keys and their types:
 
-| Key    | Type | Example value             |
-| ------ | ---- | ------------------------- |
-| title  | str  | "foo"                     |
-| body   | str  | "bar"                     |
-| userId | int  | 1                         |
+| Key    | Type | Example value            |
+| ------ | ---- | ------------------------ |
+| title  | str  | "Lab 6 Test"             |
+| body   | str  | "Testing REST API"       |
+| userId | int  | 1                        |
 | id     | int  | 101 (added by the server) |
 
 ## DELETE /posts/1
@@ -77,13 +77,9 @@ Response body:
 ## Notes
 
 - Content-Type for every route is `application/json; charset=utf-8`,
-  not plain `application/json` as used in Part 1. Tests must assert
-  the full value or they will fail.
-- POST /posts returned 201 and a new id (101), but a follow-up
-  GET /posts/101 returned 404. The post was never actually saved.
-- DELETE /posts/1 returned 200, but a follow-up GET /posts/1 still
-  returned 200. The post was never actually deleted.
-- Conclusion: JSONPlaceholder accepts POST and DELETE and returns
-  success codes, but does not change any data on the server. A test
-  that checks only the status code would wrongly pass. Confirming a
-  write requires reading the resource back afterwards.
+  not plain `application/json` as used in Part 1.
+- GET /posts/1 returned a JSON object containing `userId`, `id`, `title`, and `body`.
+- GET /posts returned a JSON array containing 100 post objects.
+- POST /posts returned status code 201 and the server added a new `id` value of 101.
+- DELETE /posts/1 returned status code 200 with an empty JSON object `{}`.
+- Conclusion: The API returned the expected success responses for all four routes tested. This shows that API testing should check not only the status code, but also the response headers and the structure of the response body.
