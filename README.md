@@ -1,13 +1,13 @@
 # Lab 6: REST API Testing
 
 // Group members
-Nurul Afiqah Insyirah Binti Abu 22002020
-Ahmad Zamani Ridzwan Bin Mohd Zawawi 22006275
-Nurul Izzati Binti Hussni 22006837
+Nurul Afiqah Insyirah Binti Abu 22002020  
+Ahmad Zamani Ridzwan Bin Mohd Zawawi 22006275  
+Nurul Izzati Binti Hussni 22006837  
 
-**Duration:** 2 hours  **Work mode:** groups
+**Duration:** 2 hours  
+**Work mode:** groups
 
-<<<<<<< HEAD
 This lab has two parts. Part 1 establishes the method, against an
 application whose contract is given to you. Part 2 applies the same
 method to an application whose contract you must establish yourself.
@@ -16,9 +16,8 @@ method to an application whose contract you must establish yourself.
 
 # Part 1: Testing a given contract
 
-=======
->>>>>>> 72f504e356286eeab4184025332cac488a592e2a
-**Application under test:** `https://pytodo-lab6.onrender.com` (the PyTodo JSON API)
+**Application under test:** `https://pytodo-lab6.onrender.com`
+(the PyTodo JSON API)
 
 ## 1. What you are building
 
