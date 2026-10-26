@@ -1,6 +1,6 @@
 # API Findings: JSONPlaceholder
 
-Testers (Group 1): Nurul Afiqah Insyirah, Nurul Izzati, Ahmad Zamani, Hanif Aiman
+Testers (Group 1): Nurul Afiqah Insyirah, Nurul Izzati, Ahmad Zamani
 
 Date: 26 October 2026
 
