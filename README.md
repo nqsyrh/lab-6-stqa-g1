@@ -1,5 +1,11 @@
 # Lab 6: REST API Testing
 
+// Group members
+Nurul Afiqah Insyirah Binti Abu 22002020
+Hanif Aiman Bin Mohd nafi 22002233
+Ahmad Zamani Ridzwan Bin Mohd Zawawi 22006275
+Nurul Izzati Binti Hussni 22006837
+
 **Duration:** 2 hours  **Work mode:** groups
 
 <<<<<<< HEAD
