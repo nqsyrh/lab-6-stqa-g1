@@ -1,0 +1,14 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.6, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\Administrator\AppData\Local\Programs\Python\Python312\python.exe
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.6', 'Platform': 'Windows-11-10.0.26200-SP0', 'Packages': {'pytest': '9.1.1', 'pluggy': '1.6.0'}, 'Plugins': {'anyio': '4.10.0', 'html': '4.2.0', 'metadata': '3.1.1'}}
+rootdir: C:\Users\Administrator\Downloads\lab-6-stqa-g1
+plugins: anyio-4.10.0, html-4.2.0, metadata-3.1.1
+collecting ... collected 4 items
+
+test_public_api.py::test_get_single_post PASSED                          [ 25%]
+test_public_api.py::test_get_all_posts PASSED                            [ 50%]
+test_public_api.py::test_create_post PASSED                              [ 75%]
+test_public_api.py::test_delete_post PASSED                              [100%]
+
+============================== 4 passed in 6.19s ==============================

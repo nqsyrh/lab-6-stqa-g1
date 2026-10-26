@@ -1,0 +1,17 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.6, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\Administrator\AppData\Local\Programs\Python\Python312\python.exe
+cachedir: .pytest_cache
+metadata: {'Python': '3.12.6', 'Platform': 'Windows-11-10.0.26200-SP0', 'Packages': {'pytest': '9.1.1', 'pluggy': '1.6.0'}, 'Plugins': {'anyio': '4.10.0', 'html': '4.2.0', 'metadata': '3.1.1'}}
+rootdir: C:\Users\Administrator\Downloads\lab-6-stqa-g1
+plugins: anyio-4.10.0, html-4.2.0, metadata-3.1.1
+collecting ... collected 7 items
+
+test_api.py::test_get_tasks_requires_login PASSED                        [ 14%]
+test_api.py::test_get_tasks_returns_json_list PASSED                     [ 28%]
+test_api.py::test_create_task_with_valid_data PASSED                     [ 42%]
+test_api.py::test_create_task_with_invalid_data PASSED                   [ 57%]
+test_api.py::test_delete_existing_task PASSED                            [ 71%]
+test_api.py::test_delete_missing_task_returns_404 PASSED                 [ 85%]
+test_api.py::test_create_read_delete_flow PASSED                         [100%]
+
+============================= 7 passed in 12.83s ==============================
