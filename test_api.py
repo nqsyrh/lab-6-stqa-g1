@@ -15,6 +15,7 @@ Run with:
 GET /api/tasks and the first POST test are finished, as your pattern.
 Fill in the sections marked TODO.
 """
+
 import os
 
 import pytest
@@ -47,23 +48,33 @@ def test_get_tasks_requires_login():
 
 def test_get_tasks_returns_json_list(logged_in_session):
     response = logged_in_session.get(f"{BASE_URL}/api/tasks")
+
     assert response.status_code == 200
     assert response.headers["Content-Type"] == "application/json"
     assert isinstance(response.json(), list)
 
 
 # ============================================================
-# POST /api/tasks — one example finished, one for you to write
+# POST /api/tasks
 # ============================================================
 
 def test_create_task_with_valid_data(logged_in_session):
-    payload = {"title": "Write report", "priority": 3, "due_date": "2026-12-01"}
-    response = logged_in_session.post(f"{BASE_URL}/api/tasks", json=payload)
+    payload = {
+        "title": "Write report",
+        "priority": 3,
+        "due_date": "2026-12-01",
+    }
+
+    response = logged_in_session.post(
+        f"{BASE_URL}/api/tasks",
+        json=payload,
+    )
 
     assert response.status_code == 201
     assert response.headers["Content-Type"] == "application/json"
 
     body = response.json()
+
     assert body["title"] == "Write report"
     assert body["priority"] == 3
     assert body["due_date"] == "2026-12-01"
@@ -72,30 +83,64 @@ def test_create_task_with_valid_data(logged_in_session):
 
 
 def test_create_task_with_invalid_data(logged_in_session):
-    # TODO: send a payload that breaks the rules, for example
-    # priority=9 (must be 1 to 5), or title="ab" (too short).
-    # TODO: assert the status code is 400.
-    # TODO: assert response.json() has an "errors" key, and that it
-    # is a non-empty list.
-    pass
+    payload = {
+        "title": "ab",
+        "priority": 9,
+        "due_date": "2026-12-01",
+    }
+
+    response = logged_in_session.post(
+        f"{BASE_URL}/api/tasks",
+        json=payload,
+    )
+
+    assert response.status_code == 400
+
+    body = response.json()
+
+    assert "errors" in body
+    assert isinstance(body["errors"], list)
+    assert len(body["errors"]) > 0
 
 
 # ============================================================
-# DELETE /api/tasks/<id> — write both of these
+# DELETE /api/tasks/<id>
 # ============================================================
 
 def test_delete_existing_task(logged_in_session):
-    # TODO: create a task first, so you have a real id to delete.
-    # TODO: call logged_in_session.delete(f"{BASE_URL}/api/tasks/{the_id}")
-    # TODO: assert status code 200
-    # TODO: assert the response JSON says {"status": "deleted", "id": the_id}
-    pass
+    payload = {
+        "title": "Task to delete",
+        "priority": 2,
+        "due_date": "2026-12-01",
+    }
+
+    create_response = logged_in_session.post(
+        f"{BASE_URL}/api/tasks",
+        json=payload,
+    )
+
+    assert create_response.status_code == 201
+
+    task_id = create_response.json()["id"]
+
+    delete_response = logged_in_session.delete(
+        f"{BASE_URL}/api/tasks/{task_id}"
+    )
+
+    assert delete_response.status_code == 200
+
+    assert delete_response.json() == {
+        "status": "deleted",
+        "id": task_id,
+    }
 
 
 def test_delete_missing_task_returns_404(logged_in_session):
-    # TODO: call DELETE on an id that does not exist, for example 999999.
-    # TODO: assert status code 404.
-    pass
+    response = logged_in_session.delete(
+        f"{BASE_URL}/api/tasks/999999"
+    )
+
+    assert response.status_code == 404
 
 
 # ============================================================
@@ -103,8 +148,54 @@ def test_delete_missing_task_returns_404(logged_in_session):
 # ============================================================
 
 def test_create_read_delete_flow(logged_in_session):
-    # TODO: create a task, keep its id from the response body.
-    # TODO: GET /api/tasks and assert a task with that id is in the list.
-    # TODO: DELETE that id.
-    # TODO: GET /api/tasks again and assert no task with that id remains.
-    pass
+    payload = {
+        "title": "Flow test task",
+        "priority": 4,
+        "due_date": "2026-12-01",
+    }
+
+    # Create the task
+    create_response = logged_in_session.post(
+        f"{BASE_URL}/api/tasks",
+        json=payload,
+    )
+
+    assert create_response.status_code == 201
+
+    task_id = create_response.json()["id"]
+
+    # Read the task list and confirm the task exists
+    get_response = logged_in_session.get(
+        f"{BASE_URL}/api/tasks"
+    )
+
+    assert get_response.status_code == 200
+
+    tasks = get_response.json()
+
+    assert any(
+        task["id"] == task_id
+        for task in tasks
+    )
+
+    # Delete the task
+    delete_response = logged_in_session.delete(
+        f"{BASE_URL}/api/tasks/{task_id}"
+    )
+
+    assert delete_response.status_code == 200
+
+    # Read the task list again
+    get_response_after_delete = logged_in_session.get(
+        f"{BASE_URL}/api/tasks"
+    )
+
+    assert get_response_after_delete.status_code == 200
+
+    tasks_after_delete = get_response_after_delete.json()
+
+    # Confirm the deleted task is gone
+    assert not any(
+        task["id"] == task_id
+        for task in tasks_after_delete
+    )
